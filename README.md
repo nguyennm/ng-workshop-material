@@ -4,7 +4,7 @@ AngularJS Workshop Lab using Angular CLI & Material 2
 
 ## Prerequisites
 
-1. Angular CLI v1.0.0 [get here](https://cli.angular.io/)
+[Angular CLI v1.0.0](https://cli.angular.io/)
 
 ## Installation
 
