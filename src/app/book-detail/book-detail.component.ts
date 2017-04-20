@@ -47,8 +47,10 @@ export class BookDetailComponent implements OnInit, OnDestroy {
       error => this.updateMessage(<any>error, 'Error'));
   }
 
-  onRatingClicked(message: string): void {
-    this.updateMessage(message, 'INFO');
+  onRatingUpdate(rating: number): void {
+    this._snackBar.open(`Rating updated to ${rating} stars!`, 'DISMISS', {
+      duration: 3000
+    });
   }
 
   updateMessage(message:string, type:string, actionText:string = 'DISMISS') {

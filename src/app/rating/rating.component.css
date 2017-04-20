@@ -1,6 +1,9 @@
 .material-icons {
   cursor: pointer;
-  color: rgba(103,58,183,.12);
+  color: rgba(103,58,183,.15);
+}
+.material-icons:hover {
+  color: rgba(103,58,183,.35);
 }
 .material-icons.active {
   color: #000;
