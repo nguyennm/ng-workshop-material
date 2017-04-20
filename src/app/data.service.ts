@@ -12,8 +12,18 @@ export class DataService {
   constructor(private _http: Http) { }
 
   getBooks(): Observable<IBook[]> {
+    let localBooks = localStorage.getItem('books');
+    if (localBooks) {
+      return Observable.create(observer => {
+        observer.next(JSON.parse(localBooks));
+      });
+    }
     return this._http.get(this._booksUrl)
-      .map((response: Response) => <IBook[]>response.json())
+      .map((response: Response) => {
+        let data: IBook[] = <IBook[]>response.json();
+        localStorage.setItem('books', JSON.stringify(data));
+        return data;
+      })
       .catch(this.handleError);
   }
 
@@ -22,6 +32,33 @@ export class DataService {
       .map((books: IBook[]) => books.find(b => b.id === id))
       //.do(data => console.log( JSON.stringify(data)))
       .catch(this.handleError);
+  }
+
+  addBook(book: IBook): Observable<IBook[]> {
+    const local:string = localStorage.getItem('books');
+    if (!local) return Observable.throw('Local storage not found.');
+    let localBooks:IBook[] = JSON.parse(local);
+    localBooks.push(book);
+    localStorage.setItem('books', JSON.stringify(localBooks));
+    return Observable.create(observer => {
+      observer.next(localBooks);
+    });
+  }
+
+  updateBook(book: IBook): Observable<IBook[]> {
+    const local:string = localStorage.getItem('books');
+    if (!local) return Observable.throw('Local storage not found.');
+    let localBooks:IBook[] = JSON.parse(local);
+    localBooks = localBooks.map(b => {
+      if (b.id === book.id) {
+        return Object.assign(b, book);
+      }
+      return b;
+    });
+    localStorage.setItem('books', JSON.stringify(localBooks));
+    return Observable.create(observer => {
+      observer.next(localBooks);
+    });
   }
 
   private handleError(error:any) {

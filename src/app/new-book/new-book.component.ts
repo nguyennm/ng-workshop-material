@@ -23,10 +23,6 @@ export class NewBookComponent implements OnInit {
     }
   }
 
-  updateRating(rating:number) :void {
-    this.book.rating = rating;
-  }
-
   cancel(): void {
     this._dialogRef.close();
   }

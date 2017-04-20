@@ -21,10 +21,7 @@ export class CollectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._dataService.getBooks()
-      .subscribe(
-        books => this.books = books,
-        error => this.updateMessage(<any>error, 'ERROR'));
+    this.getBooks();
   }
 
   pageTitle:string = 'Books';
@@ -45,30 +42,52 @@ export class CollectionComponent implements OnInit {
     }
   }
 
-  onRatingUpdate(rating:number): void {
-    this._snackBar.open(`Rating updated to ${rating} stars!`, 'DISMISS', {
-      duration: 3000
-    });
+  onRatingUpdate(book:IBook): void {
+      this.updateBook(book);
   }
 
   openDialog(bookId:number): void {
     let config = {width: '650px', height: '400x', position: {top: '50px'}};
     let dialogRef = this._dialog.open(BookDetailComponent, config);
     dialogRef.componentInstance.bookId = bookId;
+    dialogRef.afterClosed().subscribe(res => {
+      this.getBooks();
+    });
   }
 
   openRoute(bookId:number): void {
     this._router.navigate(['/collection', bookId]);
   }
 
+  getBooks(): void {
+    this._dataService.getBooks()
+      .subscribe(
+        books => this.books = books,
+        error => this.updateMessage(<any>error, 'ERROR'));
+  }
+
   addBook(): void {
     let config = {width: '650px', height: '650x', position: {top: '50px'}, disableClose: true};
     let dialogRef = this._dialog.open(NewBookComponent, config);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        result.id = this.books.length + 1
-        this.books.push(result);
+    dialogRef.afterClosed().subscribe(newBook => {
+      if (newBook) {
+        newBook.id = this.books.length + 1;
+        this._dataService.addBook(newBook)
+          .subscribe(
+            books => this.books = books,
+            error => this.updateMessage(<any>error, 'ERROR'));
       }
     });
+  }
+
+  updateBook(book: IBook): void {
+    this._dataService.updateBook(book)
+      .subscribe(
+        books => {
+          this.books = books;
+          this._snackBar.open(`"${book.title}" has been updated!`, 'DISMISS', {
+            duration: 3000
+          });
+        },error => this.updateMessage(<any>error, 'ERROR'));
   }
 }

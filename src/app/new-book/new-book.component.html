@@ -11,7 +11,7 @@
       <input mdInput placeholder="Author" [(ngModel)]="book.author">
     </md-input-container>
     <p class="rating-label">Rating</p>
-    <my-rating [rating]="book.rating" (ratingClicked)="updateRating($event)">
+    <my-rating [rating]="book.rating" [book]="book">
     </my-rating>
     <md-slide-toggle color="primary" [(ngModel)]="book.isCheckedOut">Checked out?</md-slide-toggle>
   </md-card-content>
