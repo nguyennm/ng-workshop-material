@@ -1,0 +1,24 @@
+<md-card>
+  <md-card-header>
+    <md-card-title><h4>Add New Book</h4></md-card-title>
+    <img md-card-avatar src="src/content/img/pencil.png" />
+  </md-card-header>
+  <md-card-content>
+    <md-input-container>
+      <input mdInput placeholder="Book Title" [(ngModel)]="book.title">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Author" [(ngModel)]="book.author">
+    </md-input-container>
+    <p class="rating-label">Rating</p>
+    <my-rating [rating]="book.rating" (ratingClicked)="updateRating($event)">
+    </my-rating>
+    <md-slide-toggle color="primary" [(ngModel)]="book.isCheckedOut">Checked out?</md-slide-toggle>
+  </md-card-content>
+  <md-card-actions>
+    <div class="text-right">
+      <button md-button (click)="save()" color="warn"><i class="material-icons">save</i>SAVE</button>
+      <button md-button (click)="cancel()"><i class="material-icons">cancel</i>CANCEL</button>
+    </div>
+  </md-card-actions>
+</md-card>

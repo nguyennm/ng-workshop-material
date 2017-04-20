@@ -1,0 +1,32 @@
+<h3>{{pageTitle}}&nbsp;<md-slide-toggle class="plr-15" color="primary" [(ngModel)]="showOperatingHours">{{showOperatingHours ? 'Hide' : 'Show'}} library hours</md-slide-toggle></h3>
+<div [hidden]="!showOperatingHours">
+  <md-card>
+    <md-card-subtitle><strong>Operating Hours</strong></md-card-subtitle>
+    <md-card-content>{{startTime | date:'shortTime'}} - {{endTime | date:'shortTime'}} (M-F)</md-card-content>
+  </md-card>
+</div>
+<div>
+  <md-list>
+    <md-list-item *ngFor="let book of books">
+      <md-icon md-list-icon>book</md-icon>
+      <h3 md-line><strong>{{book.title}}</strong></h3>
+      <div>
+        <button md-button (click)="openDialog(book.id)"><i class="material-icons">pageview</i> Dialog</button>
+        <button md-button (click)="openRoute(book.id)"><i class="material-icons">pageview</i> Route</button>
+      </div>
+      <p md-line>
+        <span>{{book.author}}</span>
+      </p>
+      <p md-line>
+        <my-rating [rating]="book.rating" (ratingClicked)="onRatingUpdate($event)">
+        </my-rating>
+      </p>
+      <p md-line>
+        <span [class]="book.isCheckedOut ? 'chip chip-danger' : 'chip chip-success'">{{book.isCheckedOut ? 'Checked-Out' : 'Available'}}</span>
+      </p>
+    </md-list-item>
+  </md-list>
+  <div class="text-right add-btn">
+    <button md-raised-button color="primary" (click)="addBook()"><i class="material-icons">add_box</i> ADD BOOK</button>
+  </div>
+</div>

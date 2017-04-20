@@ -1,0 +1,33 @@
+<div *ngIf="book">
+  <md-card>
+    <md-card-header>
+      <md-card-title><h4>{{book.title}}</h4></md-card-title>
+      <md-card-subtitle>{{book.author}}</md-card-subtitle>
+      <img md-card-avatar src="src/content/img/book.png" />
+    </md-card-header>
+    <md-card-content>
+      <div>
+        <label><strong>Title:</strong></label>
+        <span>{{book.title}}</span>
+      </div>
+      <div>
+        <label><strong>Author:</strong></label>
+        <span>{{book.author}}</span>
+      </div>
+      <div>
+        <label><strong>Checked Out?</strong></label>
+        <span>{{book.isCheckedOut ? 'Yes' : 'No'}}</span>
+      </div>
+      <div>
+        <label><strong>Rating:</strong></label>
+        <my-rating [rating]="book.rating" (ratingClicked)="onRatingClicked($event)"></my-rating>
+      </div>
+    </md-card-content>
+    <md-card-actions>
+      <div class="text-right">
+        <button md-button md-dialog-close *ngIf="bookId"><i class="material-icons">close</i>CLOSE</button>
+        <button md-button (click)="return()" *ngIf="!bookId"><i class="material-icons">keyboard_arrow_left</i>RETURN</button>
+      </div>
+    </md-card-actions>
+  </md-card>
+</div>

@@ -1,0 +1,7 @@
+.material-icons {
+  cursor: pointer;
+  color: rgba(103,58,183,.12);
+}
+.material-icons.active {
+  color: #000;
+}
