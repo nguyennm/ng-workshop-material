@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { IBook } from 'app/ibook';
 
 @Component({
   selector: 'my-rating',
@@ -10,7 +11,8 @@ export class RatingComponent implements OnInit, OnChanges {
   constructor() { }
 
   @Input() rating: number;
-  @Output() ratingClicked: EventEmitter<number> = new EventEmitter<number>();
+  @Input() book: IBook;
+  @Output() ratingClicked: EventEmitter<IBook> = new EventEmitter<IBook>();
 
   ngOnInit(): void {
     //console.log("ngOnInit called for: " + this.rating.toString());
@@ -22,7 +24,8 @@ export class RatingComponent implements OnInit, OnChanges {
 
   click(rating:number): void {
     this.rating = rating;
-    this.ratingClicked.emit(this.rating);
+    this.book.rating = rating;
+    this.ratingClicked.emit(this.book);
   }
 
 }

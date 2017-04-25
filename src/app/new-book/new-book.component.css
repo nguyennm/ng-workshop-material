@@ -16,6 +16,7 @@
 .mat-input-container {
   width: 100%;
   line-height:2.23;
+  margin-bottom:15px;
 }
 p.rating-label {
   color: rgba(0,0,0,.38);
@@ -23,4 +24,5 @@ p.rating-label {
 .mat-slide-toggle {
   height: 45px;
   line-height: 45px;
+  margin: 10px 0;
 }

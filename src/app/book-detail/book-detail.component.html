@@ -20,7 +20,7 @@
       </div>
       <div>
         <label><strong>Rating:</strong></label>
-        <my-rating [rating]="book.rating" (ratingClicked)="onRatingClicked($event)"></my-rating>
+        <my-rating [rating]="book.rating" [book]="book" (ratingClicked)="onRatingUpdate($event)"></my-rating>
       </div>
     </md-card-content>
     <md-card-actions>
