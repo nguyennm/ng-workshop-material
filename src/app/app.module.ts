@@ -31,7 +31,7 @@ import { NewBookComponent } from './new-book/new-book.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     BrowserAnimationsModule,
     routing
   ],

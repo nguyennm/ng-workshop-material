@@ -7,7 +7,7 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class DataService {
 
-  private _booksUrl = 'src/api/books.json';
+  private _booksUrl = 'assets/api/books.json';
 
   constructor(private _http: Http) { }
 
