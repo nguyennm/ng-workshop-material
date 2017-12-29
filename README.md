@@ -1,6 +1,6 @@
 # ng-workshop-material
 
-AngularJS Workshop Lab using Angular CLI & Material 2
+Angular 2 Workshop Lab using Angular CLI & Material UI
 
 ## Prerequisites
 
